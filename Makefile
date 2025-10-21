@@ -1,23 +1,34 @@
+CC    = gcc
+SRC   = main.c
+BIN   = rescalc
+OPT   = s
+MARCH = native
+MTUNE = $(march)
+DEST  = /usr/local/bin
+
+
 all: compile strip
 
 compile:
-  gcc main.c -o rescalc -Os -march=native -mtune=native
+	$(CC) $(SRC) -o $(BIN) -O$(OPT) -march=$(MARCH) -mtune=$(MTUNE)
 
 strip:
-  objcopy --strip-all rescalc
+	objcopy --strip-all $(BIN)
 
 clean:
-  rm rescalc
+	rm $(BIN)
 
 install: check-root
-  mkdir -p /usr/local/bin  
-  cp rescalc /usr/local/bin
+	mkdir -p $(DEST)  
+	cp $(BIN) $(DEST)
 
 remove: check-root
-  rm -f /usr/local/bin/rescalc  
+	rm -f $(DEST)/$(BIN)  
 
 check-root:
-  @if [ "$$(id -u)" -ne 0 ]; then \
-    echo "Are you root?"; \
-    exit 1; \
-  fi
+	@if [ "$$(id -u)" -ne 0 ]; then \
+		echo "Are you root?"; \
+		exit 1; \
+	fi
+
+.PHONY: all compile strip clean install remove check-root
