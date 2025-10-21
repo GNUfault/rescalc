@@ -3,7 +3,7 @@ SRC   = main.c
 BIN   = rescalc
 OPT   = s
 MARCH = native
-MTUNE = $(march)
+MTUNE = $(MARCH)
 DEST  = /usr/local/bin
 
 
