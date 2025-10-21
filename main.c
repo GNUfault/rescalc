@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        fprintf(stderr, "Usage: %s <height> <aspect> (e.g., %s 480 4/3)\n", argv[0]);
+        fprintf(stderr, "Usage: %s <height> <aspect> (e.g., %s 480 4/3)\n", argv[0], argv[0]);
         return 1;
     }
 
